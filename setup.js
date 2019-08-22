@@ -100,6 +100,15 @@ async function main() {
   } catch (e) {
     console.error('Villa við að búa til pantanir og körfur:', e.message);
   }
+
+  // bua til schedule toflu
+  try {
+    const createData = await readFileAsync('./sql/insert-schedule.sql');
+    await query(createData.toString('utf8'));
+    console.info('Schedule búin til');
+  } catch (e) {
+    console.error('Villa við að búa til schedule:', e.message);
+  }
 }
 
 main().catch((err) => {

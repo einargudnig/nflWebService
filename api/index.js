@@ -8,6 +8,12 @@ const requireAdmin = [
 ];
 
 const {
+  scheduleList,
+  addResults,
+  getOneGame,
+} = require('./schedule');
+
+const {
   listCategories,
   listCategory,
   createCategory,
@@ -69,10 +75,19 @@ function indexRoute(req, res) {
       orders: '/orders',
       order: '/orders/{id}',
     },
+    schedule: '/schedule',
+    game: '/schedule/game',
+    results: '/schedule/results',
   });
 }
 
 router.get('/', indexRoute);
+
+// ATHATH!!!!
+// Her er route a schedule sem eg baetti vid nedst i index listann.
+router.get('/schedule', requireAuth, catchErrors(scheduleList));
+router.get('/schedule/game/:eid', requireAuth, catchErrors(getOneGame));
+router.post('/schedule/game', requireAuth, catchErrors(addResults));
 
 router.get('/users', requireAdmin, catchErrors(listUsers));
 router.get('/users/me', requireAuth, catchErrors(currentUser));

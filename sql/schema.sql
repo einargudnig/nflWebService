@@ -48,3 +48,29 @@ CREATE TABLE orderLines (
   updated TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp,
   UNIQUE(product_id, order_id) -- sama vara ekki oft í sömu körfu/pöntun
 );
+
+CREATE TABLE schedule (
+  eid VARCHAR(256) PRIMARY KEY,
+  gsis VARCHAR(256),
+  d VARCHAR(256),
+  t VARCHAR(256),
+  q VARCHAR(256),
+  k VARCHAR(256),
+  h VARCHAR(256),
+  hnn VARCHAR(256),
+  hs VARCHAR(256),
+  v VARCHAR(256),
+  vnn VARCHAR(256),
+  vs VARCHAR(256),
+  p VARCHAR(256),
+  rz VARCHAR(256),
+  ga VARCHAR(256),
+  gt VARCHAR(256)
+);
+
+CREATE TABLE results (
+  id SERIAL PRIMARY KEY,
+  game_eid VARCHAR(256) REFERENCES schedule(eid) NOT NULL,
+  myWinner VARCHAR(256),
+  user_id INTEGER REFERENCES users(id) -- NOT NULL ATH MUNA!!! user er frátekið orð
+);

@@ -127,6 +127,34 @@ async function createFakeProducts(num, categories, images) {
   return inserted;
 }
 
+/**
+ * "Gervi" API sem skilar statískum gögnum fyrir fyrirlestra. Gætum hæglega
+ * tengt hérna við "alvöru" API.
+ * Sameinar statísk gögn við gögn geymd í localStorage.
+ */
+/*
+ATH MUNA AÐ BÆTA SKRÁ VIÐ!!!!!!!!!!!!!!!
+import data from './schedule.json';
+*/
+
+/**
+ * Skilar lista af fyrirlestrum, síuuðum eftir flokkum eða ekki. Gögn um það
+ * hvort notandi hafi klárað fyrirlestrar er bætt við gögn.
+ *
+ * @param {array} filters Fylki af flokkum sem fyrirlestrar mega vera í.
+ *                        Sjálfgefið [].
+ * @returns {array} Fylki af fyrirlestrum.
+ */
+/*
+export function getScheduleList(filters = []) {
+  const { games } = data;
+
+  return games
+    .filter(i => filters.length === 0 || filters.indexOf(i.week) >= 0)
+}
+*/
+
+
 module.exports = {
   createFakeCategories,
   createFakeProducts,
