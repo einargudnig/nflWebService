@@ -11,6 +11,7 @@ const {
   scheduleList,
   addResults,
   getOneGame,
+  listResults,
 } = require('./schedule');
 
 const {
@@ -88,6 +89,7 @@ router.get('/', indexRoute);
 router.get('/schedule', requireAuth, catchErrors(scheduleList));
 router.get('/schedule/game/:eid', requireAuth, catchErrors(getOneGame));
 router.post('/schedule/game', requireAuth, catchErrors(addResults));
+router.get('/schedule/results', requireAuth, catchErrors(listResults));
 
 router.get('/users', requireAdmin, catchErrors(listUsers));
 router.get('/users/me', requireAuth, catchErrors(currentUser));

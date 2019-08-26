@@ -69,8 +69,8 @@ CREATE TABLE schedule (
 );
 
 CREATE TABLE results (
-  id SERIAL PRIMARY KEY,
-  game_eid VARCHAR(256) REFERENCES schedule(eid) NOT NULL,
-  myWinner VARCHAR(256),
+  id SERIAL,
+  game_eid VARCHAR(256) REFERENCES schedule(eid),
+  my_winner VARCHAR(256),
   user_id INTEGER REFERENCES users(id) -- NOT NULL ATH MUNA!!! user er frátekið orð
 );

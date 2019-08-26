@@ -29,7 +29,7 @@ async function getGame(eid) {
     q,
     [eid],
   );
-  // console.log('HALLO', games);
+
   if (games.rows.length !== 1) {
     return null;
   }
@@ -38,9 +38,10 @@ async function getGame(eid) {
 }
 
 async function getResults(userId) {
+  // console.log(userId);
   const q = `
     SELECT
-      id, 
+      * 
     FROM
       results
     WHERE
@@ -48,7 +49,7 @@ async function getResults(userId) {
   `;
 
   const result = await query(q, [userId]);
-
+  // console.log(result);
   if (result.rows.length !== 1) {
     return null;
   }
