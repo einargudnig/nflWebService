@@ -3,14 +3,6 @@ const xss = require('xss');
 const { getGame, getResults } = require('./schedule-helpers');
 const { query /* pagedQuery */ } = require('../utils/db');
 
-
-/**
- * ATH MUNA AÐ SKOÐA HVERNIG CARTið ER UPPBYGGT
- * ÞAÐ ER EKKI TAFLA PER SE SEM HEITIR KAR, HELDUR
- * BÚIN TIL ÚR ORDERS OG ORDERLINE. KANNSKI HÆGT AÐ GERA SVIPAÐ
- * TAKA USERS OG SCHEDULE OG BOMBA EID OG WINNER Í RESULTS.
- */
-
 /**
  *Fall sem birtir lista af leikjum
  */
@@ -25,18 +17,15 @@ async function scheduleList(req, res) {
 /**
  *Fall sem sér til þess að hver notandi hafi sér
  *Töflu fyrir sig
+ * ATH ER EKKI AD NOTA ATM, KANNSKI EYDA????
  */
 async function createOrReturnResults(userId) {
-  // const currentSchedule = await getResults(userId);
-  // eslint-disable-next-line no-console
-  // console.log('HALLOO', currentSchedule);
-  // Fae hallo OG gildid sem er i DB -> Raiders.
+  const currentSchedule = await getResults(userId);
 
-  /*
   if (currentSchedule) {
     return currentSchedule;
   }
-  */
+
 
   const q = `
   INSERT INTO results (user_id)
@@ -67,26 +56,21 @@ async function getOneGame(req, res) {
 }
 
 // Fall sem bætir sigurvegara í results
-async function addWinnerToResults(eid, myWinner) {
+async function addWinnerToResults(eid, myWinner, userId) {
   const q = `
-    UPDATE
-      results
-    SET
-      my_winner = $2
-    WHERE
-      game_eid = $1
+    INSERT INTO results(game_eid, my_winner, user_id)
+    Values($1, $2, $3)
     `;
-  // console.log(q);
 
   const values = [
     xss(eid),
     xss(myWinner),
+    xss(userId),
   ];
 
   const result = await query(q, values);
-  // eslint-disable-next-line no-console
-  console.log('Hvada value er eg med her', result);
-  return result.rowCount === 1;
+
+  return result.rowCount > 0;
 }
 
 /**
@@ -94,11 +78,9 @@ async function addWinnerToResults(eid, myWinner) {
  */
 async function listResults(req, res) {
   const { user } = req;
-  // console.log(req);
 
   const results = await getResults(user.id);
-  // console.log(results);
-
+  console.log(results);
   if (!results) {
     return res.status(404).json({ error: 'Results not found' });
   }
@@ -120,22 +102,26 @@ async function addResults(req, res) {
   // HERNA erum vid komin med rettan leik midad vid eid
   // eslint-disable-next-line no-console
   console.log('Leikur sem vid viljum setja inn', game);
+  // er med rettan leik her, get eg ekki bara notad thessa breytu afram??
 
   if (!game) {
     return res.status(404).json({ error: 'Leikur ekki til!' });
   }
 
+  /*
   const resultsForUser = await createOrReturnResults(user.id);
-  // Kemst hingad en resultForUser skilar raiders winner
   // eslint-disable-next-line no-console
-  console.log('Why null??', resultsForUser);
+  console.log('Wrsl??', resultsForUser);
+  */
 
-  await addWinnerToResults(resultsForUser.id, eid, myWinner);
+  const banani = await addWinnerToResults(eid, myWinner, user.id);
 
+  /*
   const updateResults = await getResults(user.id);
   // eslint-disable-next-line no-console
-  console.log(updateResults);
-  return res.status(201).json(updateResults);
+  console.log('Afhverju null her lika?', updateResults);
+  */
+  return res.status(201).json(banani);
 }
 
 module.exports = {

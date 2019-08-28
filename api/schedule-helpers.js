@@ -37,26 +37,31 @@ async function getGame(eid) {
   return games.rows[0];
 }
 
+/**
+ *
+ * Fall sem birtir nidurstodur ur toflu.
+ */
 async function getResults(userId) {
   // console.log(userId);
   const q = `
     SELECT
-      * 
+      game_eid, my_winner, user_id
     FROM
       results
     WHERE
       user_id = $1
   `;
 
-  const result = await query(q, [userId]);
-  // console.log(result);
-  if (result.rows.length !== 1) {
+  const result = await query(
+    q,
+    [userId],
+  );
+  console.log('HERNA', result);
+  if (result.rows.length === 0) {
     return null;
   }
 
-  const results = result.rows[0];
-
-  return results;
+  return result;
 }
 
 module.exports = {

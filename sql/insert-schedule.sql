@@ -94,15 +94,3 @@ INSERT INTO
     (eid, gsis, d, t, q, k, h, hnn, hs, v, vnn, vs, p, rz, ga, gt)
   VALUES
     ('2019090901', '57915', 'Mon', '10:20', 'P', '', 'OAK', 'raiders', '', 'DEN', 'broncos', '', '', '', '', 'REG');
-
-INSERT INTO
-  results
-    (id, game_eid, my_winner, user_id)
-  VALUES
-    (1, '2019090901', 'broncos', 2);
-
-INSERT INTO
-  results
-    (id, game_eid, my_winner, user_id)
-  VALUES
-    (2, '2019090901', 'raiders', 1);

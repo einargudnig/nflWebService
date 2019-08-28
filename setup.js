@@ -14,11 +14,13 @@ const util = require('util');
 
 const requireEnv = require('./utils/requireEnv');
 const { query } = require('./utils/db');
+/*
 const {
   uploadImagesFromDisk,
   createFakeCategories,
   createFakeProducts,
 } = require('./data');
+*/
 
 const readFileAsync = util.promisify(fs.readFile);
 
@@ -26,18 +28,18 @@ requireEnv(['DATABASE_URL', 'CLOUDINARY_URL']);
 
 const {
   DATABASE_URL: databaseUrl,
-  CLOUDINARY_URL: cloudinaryUrl,
+  /* CLOUDINARY_URL: cloudinaryUrl,
   NUMBER_OF_FAKE_CATEGORIES: numberOfFakeCategories = 12,
   NUMBER_OF_FAKE_PRODUCTS: numberOfFakeProducts = 100,
-  IMAGE_FOLDER: imageFolder = './img',
+  IMAGE_FOLDER: imageFolder = './img', */
 } = process.env;
 
 async function main() {
   console.info(`Set upp gagnagrunn á ${databaseUrl}`);
-  console.info(`Set uppp tengingu við Cloudinary á ${cloudinaryUrl}`);
+  // console.info(`Set uppp tengingu við Cloudinary á ${cloudinaryUrl}`);
 
   // Fylki með myndum og slóðum á Cloudinary
-  let images = [];
+  // let images = [];
 
   // henda töflum
   try {
@@ -70,14 +72,17 @@ async function main() {
   }
 
   // senda myndir á Cloudinary
+  /*
   try {
     images = await uploadImagesFromDisk(imageFolder);
     console.info(`Sendi ${images.length} myndir á Cloudinary`);
   } catch (e) {
     console.error('Villa við senda myndir á Cloudinary:', e.message);
   }
+  */
 
   // búa til gervigögn og setja í gagnagrunn
+  /*
   try {
     const categories = await createFakeCategories(numberOfFakeCategories);
     const products =
@@ -91,8 +96,10 @@ async function main() {
     console.error('Villa við að búa til gervigögn:', e.message);
     return;
   }
+  */
 
   // búa til pantanir og körfu
+  /*
   try {
     const createData = await readFileAsync('./sql/insert-orders.sql');
     await query(createData.toString('utf8'));
@@ -100,6 +107,7 @@ async function main() {
   } catch (e) {
     console.error('Villa við að búa til pantanir og körfur:', e.message);
   }
+  */
 
   // bua til schedule toflu
   try {

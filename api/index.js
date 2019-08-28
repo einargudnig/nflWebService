@@ -63,19 +63,6 @@ function indexRoute(req, res) {
       login: '/users/login',
       me: '/users/me',
     },
-    products: {
-      products: '/products?search={query}&category={name}',
-      product: '/products/{id}',
-    },
-    categories: '/categories',
-    cart: {
-      cart: '/cart',
-      line: '/cart/line/{id}',
-    },
-    orders: {
-      orders: '/orders',
-      order: '/orders/{id}',
-    },
     schedule: '/schedule',
     game: '/schedule/game',
     results: '/schedule/results',
