@@ -56,7 +56,7 @@ async function getResults(userId) {
     q,
     [userId],
   );
-  console.log('HERNA', result);
+
   if (result.rows.length === 0) {
     return null;
   }
