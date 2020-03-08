@@ -16,7 +16,7 @@ Originally this was a school project made by Ólafur Sverrir Kjartansson my teac
 This was supposed to be a webservice for a online store.
 I used the same authentication method that was before.
 That is the reason the two users below are what they are, they pre-exist in the database.
-I used a lot of his work, mainly because when I started I thoughy it would be hard to me to start a project like this from scratch.
+I used a lot of his work, mainly because when I started I thought it would be hard to me to start a project like this from scratch.
 
 ### Users
 
